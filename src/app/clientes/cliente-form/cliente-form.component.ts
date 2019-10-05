@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Cliente } from 'src/app/cliente/models/cliente';
 import { ClienteService } from 'src/app/cliente/services/cliente.service';
 import { DocumentReference } from '@angular/fire/firestore';
+import { ClienteViewModel } from 'src/app/cliente/models/cliente-view-model';
 
 @Component({
   selector: 'app-cliente-form',
@@ -18,6 +19,9 @@ export class ClienteFormComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private clienteService : ClienteService
     ) { }
+    
+    modoInsercao : boolean = true;
+    cliente: ClienteViewModel;
 
   ngOnInit() {
     this.clienteForm=  this.formBuilder.group({
@@ -25,9 +29,17 @@ export class ClienteFormComponent implements OnInit {
         endereco : ['', Validators.required],
         casado : false
     })
+    //aqui verifica se for falso ele carrega as informaçoes e passa para metodo carregartudp 
+    if(!this.modoInsercao){
+      this.carregarTudo(this.cliente);
+    }
+  }
+//aqui set os valores pelo petchvalue 
+  carregarTudo(cliente){
+      this.clienteForm.patchValue(cliente);
   }
 
-  salvarCliente(){
+  /*salvarCliente(){
     if(this.clienteForm.invalid){
       return;
     }else{
@@ -36,9 +48,36 @@ export class ClienteFormComponent implements OnInit {
       this.clienteService.salvaCliente(cliente).then(response=> this.handleSuccessSave(response,cliente))
       .catch(err => console.error(err))
     }
-  }
-  handleSuccessSave(response:DocumentReference, cliente: Cliente){
+  }*/
+  
+
+  salvarCliente(){
+      if(this.clienteForm.invalid){
+        return;
+      }
+
+      if(this.modoInsercao){
+        let cliente: Cliente = this.clienteForm.value;
+        cliente.dataCad = new Date(); 
+        cliente.dataMod = new Date();
+
+        this.clienteService.salvaCliente(cliente)
+        .then(response=> this.handleSuccessSave(response,cliente))
+        .catch(err => console.error(err))
+      }else{
+        let cliente: ClienteViewModel = this.clienteForm.value;
+        cliente.id = this.cliente.id;
+        cliente.dataMod = new Date();
+        this.clienteService.editadarCliente(cliente)
+        .then(()=> this.handleSuccessEdit(cliente))
+        .catch(err => console.error(err))
+      }
+    }
+handleSuccessSave(response:DocumentReference, cliente: Cliente){
       this.activeModal.dismiss({cliente :cliente, id: response.id, CreateMode:true });
   }
 
+  handleSuccessEdit(cliente : ClienteViewModel){
+    this.activeModal.dismiss({cliente :cliente, id: cliente.id, CreateMode:true });
+ }
 }

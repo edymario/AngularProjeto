@@ -22,6 +22,8 @@ export class ClienteComponent implements OnInit {
     this.mostrarCliente();
   }
 
+  
+
   addCliente(){
       const modal = this.modalServicer.open(ClienteFormComponent);//para chamar uma classe para abrir uma moodal tenho que 
       //colocar no construdor para ele chama outra telas ser quase "global"
@@ -33,6 +35,9 @@ export class ClienteComponent implements OnInit {
   }
 /// aqui passei para o construtor que ele instacia no começo esse metodo que irá carregar os cliente.
   clientes : ClienteViewModel [] = []
+  modoInsercao : boolean = true;
+  cliente: ClienteViewModel;
+
   mostrarCliente(){
     this.serviceCliente.getCliente().subscribe(response =>
       {
@@ -52,6 +57,18 @@ export class ClienteComponent implements OnInit {
       });
   }
 
+  editarClick(cliente : ClienteViewModel){
+      const modal = this.modalServicer.open(ClienteFormComponent)
+      this.handleModalClienteForm.bind(this),
+      this.handleModalClienteForm.bind(this)
+      modal.result.then(
+        this.handleModalClienteForm.bind(this),
+        this.handleModalClienteForm.bind(this)
+      )
+      modal.componentInstance.modoInsercao = false;
+      modal.componentInstance.cliente =  cliente;
+  }
+//para alterar no banco de dados o status da pessoa
   checkedCasado(index: number){
     const novoValor = !this.clientes[index].casado;
     this.clientes[index].casado = novoValor;
@@ -63,6 +80,17 @@ export class ClienteComponent implements OnInit {
   }
 ////////////////////////////aqui fecha meu metodo para carregar o cliente 
   handleModalClienteForm(response){
-    
+    if(response === Object(response)){
+      if(response.modoInsercao){
+        response.cliente.id = response.id;
+        this.clientes.unshift(response.cliente);
+       // this.mostrarCliente();
+      }
+      else{//se for falso  pega resposta da modal e atualiza para carregar as informações vai para modal-form
+          let index = this.clientes.findIndex(value => value.id ==  response.id)
+          this.clientes[index] = response.cliente;
+
+      }
+    }
   }
 }
