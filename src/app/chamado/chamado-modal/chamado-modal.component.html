@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h4 class="modal-title">Adicionar Chamado</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="chamadoForm" (ngSubmit)="salvarChamado()">
+        <div class="form-group">
+            <label for="title">Tipo*</label>
+            <input type="text" id="tipo" placeholder="Notebook ou Computadot etc.." class="form-control" formControlName="tipo"/>
+            <span style="color:red;"  *ngIf="chamadoForm.controls['tipo'].touched && chamadoForm.controls['tipo'].errors?.required">
+                Por Favor Preencher Campo Tipo .</span>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Técnico*</label>
+            <input type="text" id="tec" placeholder="Preencha Nome do Técnico" class="form-control" formControlName="tec"/>
+            <span style="color:red;"  *ngIf="chamadoForm.controls['tec'].touched && chamadoForm.controls['tec'].errors?.required">
+                Por Favor Preencher Campo Técnico .</span>
+        </div>
+
+        <div class="form-group">
+            <label for="defeito">Defeito Relatado*</label>
+            <textarea id="defeito" placeholder="Defeito" class="form-control" formControlName="defeito"></textarea>
+            <span style="color:red;" *ngIf="chamadoForm.controls['defeito'].touched && chamadoForm.controls['defeito'].errors?.required">
+            Por favor Preencha o Campo Defeito.
+            </span>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="concluido" formControlName="concluido">
+            <label class="form-check-label" for="concluido">
+                Concluído
+            </label>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
+        <button class="btn btn-primary" (click)="salvaChamado()" [disabled]="chamadoForm.invalid">Salvar</button>
+</div>

@@ -27,7 +27,7 @@ export class ClienteService {
   }
 
   //Metodo para editar o cliente 
-  editadarCliente(cliente : ClienteViewModel, obj): Promise<void>{
+  editadarCliente(cliente : ClienteViewModel): Promise<void>{
     return this.db.collection(this.clienteColection).doc(cliente.id).update(cliente);
   }
   //metodo para editar apenas o campo especifico 

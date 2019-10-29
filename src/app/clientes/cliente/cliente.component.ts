@@ -4,6 +4,8 @@ import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 import { ClienteService } from 'src/app/cliente/services/cliente.service';
 import { ClienteViewModel } from 'src/app/cliente/models/cliente-view-model';
 import { DatePipe } from '@angular/common';
+import { StringifyOptions } from 'querystring';
+import { ChamadoModalComponent } from 'src/app/chamado/chamado-modal/chamado-modal.component';
 
 
 @Component({
@@ -15,7 +17,8 @@ export class ClienteComponent implements OnInit {
 
   constructor(
     private modalServicer: NgbModal,
-    private serviceCliente: ClienteService
+    private serviceCliente: ClienteService,
+    private modalChamado: NgbModal
     ) { }
 //instanciando servicecliente no inicio da aplicação
   ngOnInit() {
@@ -35,9 +38,7 @@ export class ClienteComponent implements OnInit {
   }
 /// aqui passei para o construtor que ele instacia no começo esse metodo que irá carregar os cliente.
   clientes : ClienteViewModel [] = []
-  modoInsercao : boolean = true;
-  cliente: ClienteViewModel;
-
+ 
   mostrarCliente(){
     this.serviceCliente.getCliente().subscribe(response =>
       {
@@ -55,6 +56,12 @@ export class ClienteComponent implements OnInit {
           this.clientes.push(cliente);
         });
       });
+  }
+
+  deletarClick(clienteId : string, index: number){
+    this.serviceCliente.deletarCliente(clienteId)
+    .then(() => {this.clientes.splice(index, 1);})
+    .catch(erro => console.error(erro));
   }
 
   editarClick(cliente : ClienteViewModel){
@@ -92,5 +99,18 @@ export class ClienteComponent implements OnInit {
 
       }
     }
+  }
+  addChamado(clienteId : string, index: number){
+    console.log(" number cliente = " + clienteId)
+    console.log(" index = " + index)
+    const modal = this.modalChamado.open(ChamadoModalComponent);
+    modal.result.then(
+      this.handleModalChamadoModal.bind(this,clienteId,index),
+      this.handleModalChamadoModal.bind(this,clienteId,index)
+      );
+  }
+
+  handleModalChamadoModal(response){
+    alert('janela fechada')
   }
 }

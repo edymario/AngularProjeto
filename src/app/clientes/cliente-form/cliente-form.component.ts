@@ -26,7 +26,7 @@ export class ClienteFormComponent implements OnInit {
   ngOnInit() {
     this.clienteForm=  this.formBuilder.group({
         nome : ['', Validators.required],
-        endereco : ['', Validators.required],
+        endereco : ['', Validators.required], 
         casado : false
     })
     //aqui verifica se for falso ele carrega as informaçoes e passa para metodo carregartudp 
@@ -74,10 +74,10 @@ export class ClienteFormComponent implements OnInit {
       }
     }
 handleSuccessSave(response:DocumentReference, cliente: Cliente){
-      this.activeModal.dismiss({cliente :cliente, id: response.id, CreateMode:true });
+      this.activeModal.dismiss({cliente :cliente, id: response.id, modoInsercao:true });
   }
 
   handleSuccessEdit(cliente : ClienteViewModel){
-    this.activeModal.dismiss({cliente :cliente, id: cliente.id, CreateMode:true });
+    this.activeModal.dismiss({cliente :cliente, id: cliente.id, modoInsercao:false });
  }
 }

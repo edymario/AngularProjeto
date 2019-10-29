@@ -1,18 +1,14 @@
  <h4 style="text-align: center">
-     Tela de Clientes!!
-</h4> 
-    <div style="text-align: center">
-     <button  class="btn btn-primary" (click)="addCliente()">
-       Adicionar Cliente
-     </button>
-    </div>   
+     Clientes Cadastrados!!
+</h4>  
        <table class="table table-striped" *ngIf="clientes && clientes.length > 0">
             <thead>
                 <tr>
-                    <th>Casado</th>
+                    <th>Ativo</th>
                     <th>Nome</th>
                     <th>Endereço</th>
                     <th>Data de Cadastro</th>
+                    <th>Alterar Cliente</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,24 +16,20 @@
                     <td><input type="checkbox" [checked]="cliente.casado" (change)="checkedCasado(index)" /></td>
                     <td [ngClass]="{'casado': cliente.casado, 'nao-casado': !cliente.casado}">{{cliente.nome}}</td>
                     <td>{{cliente.endereco}}</td>
-                    <td>{{cliente.dataMod | date}}</td>
+                    <td></td>
+                    <!--<td>{{cliente.dataMod | date}}</td>-->
                     <td>
                         <button class="btn btn-primary" (click)="editarClick(cliente)">Editar</button>
                         <button class="btn btn-danger" (click)="deletarClick(cliente.id, index)">Deletar</button>
+                        <button class="btn btn-success" (click)="addChamado(cliente.id, index)">Adicionar Chamado</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+    <div style="text-align: center">
+                <button  class="btn btn-primary" (click)="addCliente()">
+                  Adicionar Cliente
+                </button>
+                </div>
     
-     <!--
-
-<div class="conteiner" style="text-align: center">
-    <h1>
-    Tela Cliente 
-    </h1>
-    <br>
-
-       <button class="form-control col-3 btn btn-primary" (click)="addCliente()" >
-            <strong>Adicionar Cliente !</strong>
-       </button>
-</div>-->
+    
