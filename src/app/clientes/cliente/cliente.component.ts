@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 import { ClienteService } from 'src/app/cliente/services/cliente.service';
@@ -100,17 +100,18 @@ export class ClienteComponent implements OnInit {
       }
     }
   }
+//chamada de cliente 
   addChamado(clienteId : string, index: number){
-    console.log(" number cliente = " + clienteId)
-    console.log(" index = " + index)
-    const modal = this.modalChamado.open(ChamadoModalComponent);
+    const modal = this.modalChamado.open(ChamadoModalComponent) ;
     modal.result.then(
-      this.handleModalChamadoModal.bind(this,clienteId,index),
-      this.handleModalChamadoModal.bind(this,clienteId,index)
+      this.handleModalChamadoModal.bind(this),
+      this.handleModalChamadoModal.bind(this),
       );
+      modal.componentInstance.indexCli =  clienteId;
+      modal.componentInstance.clienteId =  index;
   }
 
   handleModalChamadoModal(response){
-    alert('janela fechada')
+  
   }
 }

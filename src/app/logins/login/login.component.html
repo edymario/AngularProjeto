@@ -1,1 +1,28 @@
-<p>login works!</p>
+
+<div class="wrapper fadeInDown">
+    <div id="Content">
+      <!-- Tabs Titles -->
+  
+      <!-- [(ngModel)] = "senha.senha" [(ngModel)] = "usuario.nome" Icon -->
+      <div class="fadeIn first">
+        <img src="../assets/incon.jpg" id="icon" alt="User Icon" />
+      </div>
+      
+        <input [(ngModel)]="usuario.nome"  type="text"  id="usuario" class="fadeIn second" name="user" placeholder="login">
+        <input [(ngModel)]="usuario.senha" type="text"  id="senha" class="fadeIn third" name="senha" placeholder="password">
+        <input type="submit" class="fadeIn fourth" value="Log In" (click)="login()">
+      
+  
+      <!-- Remind Passowrd -->
+      <div id="Footer">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+  
+    </div>
+  </div>                      		                            
+
+
+
+
+
+

@@ -6,6 +6,7 @@ import { ChamadoViewModel } from '../models/chamado-view-model';
 import { ChamadoService } from '../service/chamado.service';
 import { DocumentReference } from '@angular/fire/firestore';
 
+
 @Component({
   selector: 'app-chamado-modal',
   templateUrl: './chamado-modal.component.html',
@@ -14,6 +15,7 @@ import { DocumentReference } from '@angular/fire/firestore';
 
 export class ChamadoModalComponent implements OnInit {
   chamadoForm: FormGroup;
+
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
@@ -22,29 +24,32 @@ export class ChamadoModalComponent implements OnInit {
 
   ngOnInit() {
       this.chamadoForm = this.formBuilder.group({
+
         tipo: ['', Validators.required],
         tec: ['', Validators.required],
         defeito: ['', Validators.required],
         concluido: false
       });
   }
+  
+  
   modoInsercao : boolean = true;
   chamado: ChamadoViewModel;
+  indexCli: string;
+  clienteId:number;
   
-  salvarChamado(clienteId : string, index: number){
-    console.log(" number cliente = " + clienteId)
-    console.log(" index = " + index)
+  
 
-    console.log(this.chamadoForm.value.index)
-
+  salvarChamado(){
+    console.log("teste de chamada = " + this.indexCli);
     if(this.chamadoForm.invalid){
       return;
     }else{
       let chamado: Chamado = this.chamadoForm.value;
       chamado.dataChamado = new Date(); 
-      chamado.id_cliente = index;
-      chamado.cliente = clienteId;
-      this.chamadoService.salvaChamado(chamado).then(response=> this.handleSuccessSave(response,chamado))
+      chamado.id_cliente = this.clienteId;
+      chamado.cliente = this.indexCli;
+      this.chamadoService.salvarChamado(chamado).then(response=> this.handleSuccessSave(response,chamado))
       .catch(err => console.error(err))
     }
   }
@@ -75,10 +80,12 @@ export class ChamadoModalComponent implements OnInit {
     }
   }*/
   handleSuccessSave(response:DocumentReference, chamado: Chamado){
-    this.activeModal.dismiss({chamado :chamado, id: response.id, modoInsercao:true });
+    //, modoInsercao:true 
+    this.activeModal.dismiss({chamado :chamado, id: response.id, CreateModel:true});
 }
 
   handleSuccessEdit(chamado : ChamadoViewModel){
-    this.activeModal.dismiss({chamado :chamado, id: chamado.id, modoInsercao:false });
+    //  , modoInsercao:false
+    this.activeModal.dismiss({chamado :chamado, id: chamado.id });
   }
 }

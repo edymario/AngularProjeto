@@ -11,19 +11,18 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ChamadoService {
 
   constructor(
-    private db : AngularFirestore,
-    public activeModal: NgbActiveModal,
-    private chamadoService : ChamadoService
-  ) { }
+    private db : AngularFirestore
+    
+   ) { }
 
-  private chamadoColection = 'chamados';
-
+  private chamadoColection = 'chamado';
    /////////////////////para consulta o banco de dados usando o firebase
    getChamado(): Observable<firebase.firestore.QuerySnapshot>{
-    return this.db.collection<Chamado>(this.chamadoColection, ref => ref.orderBy ('nome', 'asc')).get()
+    return this.db.collection<Chamado>(this.chamadoColection, ref => ref.orderBy ('dataChamado', 'desc')).get()
     }
    
-    salvaChamado(chamado : Chamado): Promise<DocumentReference>{
+    salvarChamado(chamado : Chamado): Promise<DocumentReference>{
+      alert("Testes");
       return this.db.collection(this.chamadoColection).add(chamado)
     }
 

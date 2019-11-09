@@ -23,20 +23,21 @@
             <a class="dropdown-item" style="color: aliceblue" href="#">Chamados</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" style="color: aliceblue" href="#">Desenvolvedor</a>
-          </div>
+          </div> aria-disabled="true"
         </li>-->
+  
         <li class="nav-item">
-          <a class="nav-link disabled" style="color: aliceblue" href="#" tabindex="-1" aria-disabled="true">Chamados</a>
+          <a class="nav-link" style="color: aliceblue" routerLink="chamadonew">Chamados</a>
         </li>
 
-        <li class="nav-item">
+       <!-- <li class="nav-item">
             <a class="nav-link disabled" style="color: aliceblue" routerLink="produtos" tabindex="-1" aria-disabled="true">Produtos</a>
-          </li>
+          </li>-->
 
       </ul>
-      <form class="form-inline my-2 my-lg-0" [formGroup]="buscarForm" (ngSubmit)="buscar">
+      <!--<form class="form-inline my-2 my-lg-0" [formGroup]="buscarForm" (ngSubmit)="buscar">
         <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-      </form>
+      </form>-->
     </div>
   </nav>

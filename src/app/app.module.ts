@@ -1,3 +1,5 @@
+import { ChamadoGuard } from './guard/chamado.guard';
+import { ClienteGuard } from './guard/cliente.guard';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ANALYZE_FOR_ENTRY_COMPONENTS } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +17,13 @@ import { MenuComponent } from './menu/menu.component';
 import { HomeComponent } from './home/home.component';
 import { ProdutosComponent } from './produtos/produtos.component';
 import { ChamadoModalComponent } from './chamado/chamado-modal/chamado-modal.component';
-
+import { ChamadoViewComponent } from './chamado/chamado-view/chamado-view/chamado-view.component';
+import { ChamadoNewComponent } from './chamado/chamado-new/chamado-new.component';
+import { UsuarioComponent } from './usuario/usuario/usuario.component';
+import { LoginService } from './logins/login-service/login.service';
+import { FormsModule }   from '@angular/forms' //formularios para usar ngModel
+import { AuthGuardService } from './guard/auth.guard';
+//import { Router } from '@angular/router';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,17 +33,26 @@ import { ChamadoModalComponent } from './chamado/chamado-modal/chamado-modal.com
     MenuComponent,
     HomeComponent,
     ProdutosComponent,
-    ChamadoModalComponent
+    ChamadoModalComponent,
+    ChamadoViewComponent,
+    ChamadoNewComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    //Router,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     NgbModule,
     ReactiveFormsModule//para formularios
   ],
-  providers: [],
+  providers: [
+                LoginService,
+                AuthGuardService,
+                ClienteGuard,
+                ChamadoGuard],
   bootstrap: [AppComponent],
   entryComponents : [ClienteFormComponent,ChamadoModalComponent]
   //entryComponents : [ChamadoModalComponent]// sempre para colocar um tela modular tenho que declara ela dentro do module
