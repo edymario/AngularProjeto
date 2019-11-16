@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <h4 class="modal-title">Adicionar Usuário</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModel.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="usuarioForm" (ngSubmit)="salvarUser()">
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="nome">Nome*</label>
+
+          <input type="text" id="mail" placeholder="Nome" class="form-control" formControlName="nome"/>
+          <span style="color:red;"  *ngIf="usuarioForm.controls['nome'].touched && usuarioForm.controls['nome'].errors?.required">
+              Nome é Requerido.</span>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="usuario">Usuario*</label>
+          <input type="text" id="usuario" placeholder="Usuário" class="form-control" formControlName="usuario"/>
+          <span style="color:red;" *ngIf="usuarioForm.controls['usuario'].touched && usuarioForm.controls['usuario'].errors?.required">
+            Por favor Preencha o Campo Usuário.
+            </span>
+        </div>
+      </div>
+
+    <div class="form-row"><!--(change)="capturaSelect()"-->
+      <div class="form-group col-md-6">
+          <label for="perfil">Perfil*</label>
+          <select class="form-control form-control-sm-4 " name="perfil" id="perfil"  (change)="capturaSelect()">
+            <option [value]="super">Super Usuário</option>
+            <option [value]="admin">Admin</option>
+            <option [value]="user">Usuário</option>
+          </select>
+      </div>
+
+      <div class="form-group col-md-6">
+          <label for="senha">Senha*</label>
+          <input type="password" id="senha" placeholder="Senha" class="form-control" formControlName="senha">
+          <span style="color:red;" *ngIf="usuarioForm.controls['senha'].touched && usuarioForm.controls['senha'].errors?.required">
+          Senha Requerida.
+          </span>
+      </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="telefone">Telefone*</label>
+            <input type="text" id="telefone" placeholder="(00) 0000-0000" class="form-control" formControlName="telefone"/>
+            <span style="color:red;" *ngIf="usuarioForm.controls['telefone'].touched && usuarioForm.controls['telefone'].errors?.required">
+            Por favor Preencha o Campo Telefone.
+            </span>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="email">E-mail*</label>
+          <input type="text" id="mail" placeholder="E-mail" class="form-control" formControlName="email"/>
+          <span style="color:red;" *ngIf="usuarioForm.controls['email'].touched && usuarioForm.controls['email'].errors?.required">
+          Por favor Preencha o Campo E-mail.
+          </span>
+        </div>
+
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModel.close('Close click')">Fechar</button>
+      <button class="btn btn-primary" (click)="salvarUser()" [disabled]="usuarioForm.invalid">Salvar</button>
+</div>

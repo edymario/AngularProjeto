@@ -12,6 +12,42 @@
             <span style="color:red;"  *ngIf="clienteForm.controls['nome'].touched && clienteForm.controls['nome'].errors?.required">
                 Nome é Requerido.</span>
         </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="email">E-mail*</label>
+            <input type="text" id="mail" placeholder="E-mail" class="form-control" formControlName="email"/>
+            <span style="color:red;" *ngIf="clienteForm.controls['email'].touched && clienteForm.controls['email'].errors?.required">
+            Por favor Preencha o Campo E-mail.
+            </span>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="telefone">Telefone*</label>
+          <input type="text" id="telefone" placeholder="(00) 0000-0000" class="form-control" formControlName="telefone"/>
+          <span style="color:red;" *ngIf="clienteForm.controls['telefone'].touched && clienteForm.controls['telefone'].errors?.required">
+          Por favor Preencha o Campo Telefone.
+          </span>
+      </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="company">Empresa*</label>
+          <input type="text" id="company" placeholder="Empresa" class="form-control" formControlName="company"/>
+          <span style="color:red;" *ngIf="clienteForm.controls['company'].touched && clienteForm.controls['company'].errors?.required">
+            Por favor Preencha o Campo Empresa.
+            </span>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="cnpj">Cnpj*</label>
+          <input type="text" id="cnpj" placeholder="Cnpj" class="form-control" formControlName="cnpj"/>
+          <span style="color:red;" *ngIf="clienteForm.controls['cnpj'].touched && clienteForm.controls['cnpj'].errors?.required">
+            Por favor Preencha o Campo Cnpj da Empresa.
+            </span>
+        </div>
+      </div>
+
         <div class="form-group">
             <label for="endereco">Endereço*</label>
             <textarea id="endereco" placeholder="Endereço" class="form-control" formControlName="endereco"></textarea>

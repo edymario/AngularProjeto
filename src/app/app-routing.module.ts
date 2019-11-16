@@ -7,11 +7,13 @@ import { HomeComponent } from './home/home.component';
 import { ChamadoNewComponent } from './chamado/chamado-new/chamado-new.component';
 import { LoginComponent } from './logins/login/login.component';
 import { AuthGuardService } from './guard/auth.guard';
+import { UsuarioComponent } from './usuario/usuario/usuario.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent , canActivate:[AuthGuardService], /*children:[/* passar roda fihas]*/ },
   { path: 'clientes/cliente', component: ClienteComponent, canActivate:[AuthGuardService], canActivateChild:[ClienteGuard]},
+  { path: 'usuario', component: UsuarioComponent, canActivate:[AuthGuardService]},
   { path: 'home', component: HomeComponent, canActivate:[AuthGuardService] },
   { path: 'chamadonew', component: ChamadoNewComponent,  canActivate:[AuthGuardService],canActivateChild:[ChamadoGuard]},
   { path: 'index', component: LoginComponent}

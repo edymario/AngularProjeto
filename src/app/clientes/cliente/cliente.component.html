@@ -1,13 +1,14 @@
- <h4 style="text-align: center">
-     Clientes Cadastrados!!
-</h4>  
+ <h4 style="text-align: left; ">
+     Clientes Cadastrados
+</h4>
        <table class="table table-striped" *ngIf="clientes && clientes.length > 0">
             <thead>
                 <tr>
                     <th>Ativo</th>
                     <th>Nome</th>
+                    <th>Empresa</th>
+                    <th>Cnpj</th>
                     <th>Endereço</th>
-                    <th>Data de Cadastro</th>
                     <th>Alterar Cliente</th>
                 </tr>
             </thead>
@@ -15,21 +16,20 @@
                 <tr *ngFor="let cliente of clientes, let index = index">
                     <td><input type="checkbox" [checked]="cliente.casado" (change)="checkedCasado(index)" /></td>
                     <td [ngClass]="{'casado': cliente.casado, 'nao-casado': !cliente.casado}">{{cliente.nome}}</td>
+                    <td>{{cliente.company}}</td>
+                    <td>{{cliente.cnpj}}</td>
                     <td>{{cliente.endereco}}</td>
-                    <td></td>
-                    <!--<td>{{cliente.dataMod | date}}</td>-->
+
+                    <!--<td>{{cliente.dataMod | date: 'yyyy/MM/dd H:m'}}</td>-->
                     <td>
-                        <button class="btn btn-primary" (click)="editarClick(cliente)">Editar</button>
-                        <button class="btn btn-danger" (click)="deletarClick(cliente.id, index)">Deletar</button>
-                        <button class="btn btn-success" (click)="addChamado(cliente.id, index)">Adicionar Chamado</button>
+                        <button id = "buttons" class="btn btn-primary" (click)="editarClick(cliente)">Editar</button>
+                        <button id = "buttons" class="btn btn-danger" (click)="deletarClick(cliente.id, index)">Deletar</button>
+                        <button id = "buttons" class="btn btn-success" (click)="addChamado(cliente.id, index)">Adicionar Chamado</button>
                     </td>
                 </tr>
             </tbody>
         </table>
-    <div style="text-align: center">
-                <button  class="btn btn-primary" (click)="addCliente()">
-                  Adicionar Cliente
-                </button>
-                </div>
-    
-    
+        <div style="text-align: center">
+          <button  class="btn btn-primary" (click)="addCliente()">Adicionar Cliente</button>
+        </div>
+

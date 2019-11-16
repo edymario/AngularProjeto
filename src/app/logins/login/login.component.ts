@@ -20,9 +20,6 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.loginService.validarLogin(this.usuario);
-    //console.log(this.usuario);
-    //console.log(document.getElementById());
-
   }
 
 }

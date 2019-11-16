@@ -9,7 +9,7 @@ import { LoginService } from './logins/login-service/login.service';
 export class AppComponent {
   title = 'Projeto em Angular';
 
-  mostrarMenu : boolean = false;
+  mostrarMenu: boolean = false;
 
   constructor(private loginService: LoginService){
 
@@ -17,7 +17,7 @@ export class AppComponent {
 
   ngOnInit (){
     this.loginService.mostrarMenuEmitter.subscribe(
-      mostrar => this.mostrarMenu = mostrar 
+      mostrar => this.mostrarMenu = mostrar
     );
   }
 }

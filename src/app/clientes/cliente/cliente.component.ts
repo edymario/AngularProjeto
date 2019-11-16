@@ -3,8 +3,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClienteFormComponent } from '../cliente-form/cliente-form.component';
 import { ClienteService } from 'src/app/cliente/services/cliente.service';
 import { ClienteViewModel } from 'src/app/cliente/models/cliente-view-model';
-import { DatePipe } from '@angular/common';
-import { StringifyOptions } from 'querystring';
 import { ChamadoModalComponent } from 'src/app/chamado/chamado-modal/chamado-modal.component';
 
 
@@ -25,10 +23,11 @@ export class ClienteComponent implements OnInit {
     this.mostrarCliente();
   }
 
-  
+
 
   addCliente(){
-      const modal = this.modalServicer.open(ClienteFormComponent);//para chamar uma classe para abrir uma moodal tenho que 
+      const modal = this.modalServicer.open(ClienteFormComponent);
+      //para chamar uma classe para abrir uma moodal tenho que
       //colocar no construdor para ele chama outra telas ser quase "global"
       //verifica que meu coponente tela foi fechado e chama um metodo
       modal.result.then(
@@ -38,7 +37,7 @@ export class ClienteComponent implements OnInit {
   }
 /// aqui passei para o construtor que ele instacia no começo esse metodo que irá carregar os cliente.
   clientes : ClienteViewModel [] = []
- 
+
   mostrarCliente(){
     this.serviceCliente.getCliente().subscribe(response =>
       {
@@ -50,9 +49,14 @@ export class ClienteComponent implements OnInit {
             id: id,
             nome: data.nome,
             endereco: data.endereco,
+            email: data.email,
+            company: data.company,
+            cnpj: data.cnpj,
+            telefone: data.telefone,
             casado: data.casado,
             dataMod: data.dataMod
-          } 
+          }
+          console.log(cliente.casado);
           this.clientes.push(cliente);
         });
       });
@@ -85,7 +89,7 @@ export class ClienteComponent implements OnInit {
 
     this.serviceCliente.editadarClienteParcial(id, objValor)
   }
-////////////////////////////aqui fecha meu metodo para carregar o cliente 
+////////////////////////////aqui fecha meu metodo para carregar o cliente
   handleModalClienteForm(response){
     if(response === Object(response)){
       if(response.modoInsercao){
@@ -100,7 +104,7 @@ export class ClienteComponent implements OnInit {
       }
     }
   }
-//chamada de cliente 
+//chamada de cliente
   addChamado(clienteId : string, index: number){
     const modal = this.modalChamado.open(ChamadoModalComponent) ;
     modal.result.then(
@@ -112,6 +116,6 @@ export class ClienteComponent implements OnInit {
   }
 
   handleModalChamadoModal(response){
-  
+
   }
 }

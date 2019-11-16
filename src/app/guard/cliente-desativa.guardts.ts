@@ -7,8 +7,6 @@ import { Injectable } from '@angular/core';
 export class ClienteChamadoGuard implements CanActivateChild {
 
   canActivateChild( route : ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean{
-
-
       return true;
     }
   }

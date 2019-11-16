@@ -13,28 +13,32 @@ import { ClienteViewModel } from 'src/app/cliente/models/cliente-view-model';
 })
 export class ClienteFormComponent implements OnInit {
   clienteForm: FormGroup;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     public activeModal: NgbActiveModal,
     private clienteService : ClienteService
     ) { }
-    
+
     modoInsercao : boolean = true;
     cliente: ClienteViewModel;
 
   ngOnInit() {
     this.clienteForm=  this.formBuilder.group({
         nome : ['', Validators.required],
-        endereco : ['', Validators.required], 
+        endereco : ['', Validators.required],
+        company : ['', Validators.required],
+        cnpj : ['', Validators.required],
+        telefone : ['',  Validators.required],
+        email : ['',  Validators.required],
         casado : false
     })
-    //aqui verifica se for falso ele carrega as informaçoes e passa para metodo carregartudp 
+    //aqui verifica se for falso ele carrega as informaçoes e passa para metodo carregartudp
     if(!this.modoInsercao){
       this.carregarTudo(this.cliente);
     }
   }
-//aqui set os valores pelo petchvalue 
+//aqui set os valores pelo petchvalue
   carregarTudo(cliente){
       this.clienteForm.patchValue(cliente);
   }
@@ -44,12 +48,12 @@ export class ClienteFormComponent implements OnInit {
       return;
     }else{
       let cliente: Cliente = this.clienteForm.value;
-      cliente.dataCad = new Date(); 
+      cliente.dataCad = new Date();
       this.clienteService.salvaCliente(cliente).then(response=> this.handleSuccessSave(response,cliente))
       .catch(err => console.error(err))
     }
   }*/
-  
+
 
   salvarCliente(){
       if(this.clienteForm.invalid){
@@ -58,7 +62,7 @@ export class ClienteFormComponent implements OnInit {
 
       if(this.modoInsercao){
         let cliente: Cliente = this.clienteForm.value;
-        cliente.dataCad = new Date(); 
+        cliente.dataCad = new Date();
         cliente.dataMod = new Date();
 
         this.clienteService.salvaCliente(cliente)

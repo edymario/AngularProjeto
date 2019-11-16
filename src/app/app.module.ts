@@ -23,6 +23,8 @@ import { UsuarioComponent } from './usuario/usuario/usuario.component';
 import { LoginService } from './logins/login-service/login.service';
 import { FormsModule }   from '@angular/forms' //formularios para usar ngModel
 import { AuthGuardService } from './guard/auth.guard';
+import { UsuarioformComponent } from './usuario/usuario-for/usuarioform/usuarioform.component';
+
 //import { Router } from '@angular/router';
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { AuthGuardService } from './guard/auth.guard';
     ChamadoModalComponent,
     ChamadoViewComponent,
     ChamadoNewComponent,
-    UsuarioComponent
+    UsuarioComponent,
+    UsuarioformComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,7 @@ import { AuthGuardService } from './guard/auth.guard';
                 ClienteGuard,
                 ChamadoGuard],
   bootstrap: [AppComponent],
-  entryComponents : [ClienteFormComponent,ChamadoModalComponent]
+  entryComponents : [ClienteFormComponent,ChamadoModalComponent, UsuarioformComponent]
   //entryComponents : [ChamadoModalComponent]// sempre para colocar um tela modular tenho que declara ela dentro do module
   //para construir uma tela com um pou-op
 })
