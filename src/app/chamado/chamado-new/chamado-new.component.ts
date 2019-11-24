@@ -19,8 +19,9 @@ export class ChamadoNewComponent implements OnInit {
 
     ngOnInit() {
       this.mostrarChamado();
+
     }
-    chamados: ChamadoViewModel [] = []
+    chamados: ChamadoViewModel []=[]
     mostrarChamado(){
       this. serviceChamado.getChamado().subscribe(response =>
         {
@@ -29,9 +30,9 @@ export class ChamadoNewComponent implements OnInit {
             const data = value.data();
             const id = value.id;
             const chamado: ChamadoViewModel = {
-              id: data.id,
+              id: id ,
               id_cliente: data.id_cliente,
-              tecnico: data.tecnico,
+              tec: data.tec,
               defeito: data.defeito,
               solucao: data.solucao,
               dataChamado: data.dataChamado,
@@ -44,7 +45,7 @@ export class ChamadoNewComponent implements OnInit {
     }
 
     editarClick(chamado: ChamadoViewModel) {
-      alert("alert");
+
       const modal = this.modalServicer.open(ChamadoModalComponent);
       this.handleModalChamadoForm.bind(this),
       this.handleModalChamadoForm.bind(this);
@@ -56,22 +57,38 @@ export class ChamadoNewComponent implements OnInit {
       modal.componentInstance.chamado =  chamado;
     }
 
-    checkedConcluido() {
+    checkedConcluido(index: number) {
+      const novoValor = !this.chamados[index].concluido;
+      this.chamados[index].concluido = novoValor;
 
+      const objValor = {casado : novoValor};
+      const id = this.chamados[index].id;
+
+      this.serviceChamado.editarChamadoParcial(id, objValor)
+    }
+
+    deletarClick(chamadoId: string, index: number){
+      this.serviceChamado.deletarChamado(chamadoId)
+      .then(() => {this.chamados.splice(index, 1);})
+      .catch(erro => console.error(erro));
     }
 
     handleModalChamadoForm(response) {
+
       if (response === Object(response)) {
+
         if (response.modoInsercao) {
           response.chamado.id = response.id;
           this.chamados.unshift(response.chamado);
          // this.mostrarCliente();
         } else {//se for falso  pega resposta da modal e atualiza para carregar as informações vai para modal-form
+
             let index = this.chamados.findIndex(value => value.id ==  response.id)
             this.chamados[index] = response.chamado;
-
         }
       }
+    }
+    handleModalChamadoModal(response){
     }
 }
 

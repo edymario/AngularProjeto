@@ -7,16 +7,16 @@
                <th>Concluido</th>
                  <th>ID Cliente</th>
                  <th>Tecnico</th>
-                 <th>defeito</th>
-                 <th>solucao</th>
-                 <th>Adcionar Solução</th>
+                 <th>Defeito</th>
+                 <th>Solução</th>
+                 <th>Adicionar Solução</th>
              </tr>
          </thead>
          <tbody>
              <tr *ngFor="let chamados of chamados, let index = index">
                  <td><input type="checkbox" [checked]="chamados.concluido" (change)="checkedConcluido(index)" /></td>
                  <td [ngClass]="{'casado': chamados.casado, 'nao-casado': !chamados.casado}">{{chamados.id_cliente}}</td>
-                 <td>{{chamados.tecnico}}</td>
+                 <td>{{chamados.tec}}</td>
                  <td>{{chamados.defeito}}</td>
                  <td>{{chamados.solucao}}</td>
                  <td>

@@ -1,7 +1,7 @@
 export interface ChamadoViewModel {
-    id: string; 
+    id: string;
     id_cliente: string;
-    tecnico:string;
+    tec:string;
     defeito:string;
     solucao:string;
     dataChamado: Date;

@@ -28,8 +28,13 @@ export class ChamadoModalComponent implements OnInit {
         tipo: ['', Validators.required],
         tec: ['', Validators.required],
         defeito: ['', Validators.required],
+        solucao:['', Validators.required],
         concluido: false
       });
+      //aqui verifica se for falso ele carrega as informaçoes e passa para metodo carregartudp
+    if(!this.modoInsercao){
+      this.carregarTudo(this.chamado);
+    }
   }
 
 
@@ -46,6 +51,7 @@ export class ChamadoModalComponent implements OnInit {
 
     if(this.modoInsercao){
       let chamado: Chamado = this.chamadoForm.value;
+      console.log("primeiro a entrar")
       //chamado.dataCad = new Date();
       chamado.dataChamado = new Date();
       chamado.id_cliente = this.clienteId;
@@ -55,7 +61,7 @@ export class ChamadoModalComponent implements OnInit {
       .then(response => this.handleSuccessSave(response, chamado))
       .catch(err => console.error(err));
     }else{
-
+      console.log("segundo a entrar")
       let chamado: ChamadoViewModel = this.chamadoForm.value;
       chamado.id = this.chamado.id;
       this.chamadoService.editadarChamado(chamado)

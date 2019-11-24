@@ -68,14 +68,14 @@ export class ClienteComponent implements OnInit {
     .catch(erro => console.error(erro));
   }
 
-  editarClick(cliente : ClienteViewModel){
+  editarClick(cliente: ClienteViewModel){
       const modal = this.modalServicer.open(ClienteFormComponent)
       this.handleModalClienteForm.bind(this),
-      this.handleModalClienteForm.bind(this)
+      this.handleModalClienteForm.bind(this);
       modal.result.then(
         this.handleModalClienteForm.bind(this),
         this.handleModalClienteForm.bind(this)
-      )
+      );
       modal.componentInstance.modoInsercao = false;
       modal.componentInstance.cliente =  cliente;
   }
