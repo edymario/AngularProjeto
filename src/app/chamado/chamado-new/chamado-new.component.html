@@ -1,2 +1,30 @@
-<p>chamado-new works!</p>
-<div>teste</div>
+<h4 style="text-align: left; ">
+  Chamados Cadastrados
+</h4>
+    <table class="table table-striped" *ngIf="chamados && chamados.length > 0">
+         <thead>
+             <tr>
+               <th>Concluido</th>
+                 <th>ID Cliente</th>
+                 <th>Tecnico</th>
+                 <th>defeito</th>
+                 <th>solucao</th>
+                 <th>Adcionar Solução</th>
+             </tr>
+         </thead>
+         <tbody>
+             <tr *ngFor="let chamados of chamados, let index = index">
+                 <td><input type="checkbox" [checked]="chamados.concluido" (change)="checkedConcluido(index)" /></td>
+                 <td [ngClass]="{'casado': chamados.casado, 'nao-casado': !chamados.casado}">{{chamados.id_cliente}}</td>
+                 <td>{{chamados.tecnico}}</td>
+                 <td>{{chamados.defeito}}</td>
+                 <td>{{chamados.solucao}}</td>
+                 <td>
+                     <button id = "buttons" class="btn btn-primary" (click)="editarClick(chamados)">Adiconar Solução</button>
+                     <button id = "buttons" class="btn btn-danger" (click)="deletarClick(chamados.id, index)">Deletar</button>
+                 </td>
+             </tr>
+         </tbody>
+     </table>
+
+

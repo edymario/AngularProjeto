@@ -12,7 +12,7 @@ export class ChamadoService {
 
   constructor(
     private db : AngularFirestore
-    
+
    ) { }
 
   private chamadoColection = 'chamado';
@@ -20,18 +20,18 @@ export class ChamadoService {
    getChamado(): Observable<firebase.firestore.QuerySnapshot>{
     return this.db.collection<Chamado>(this.chamadoColection, ref => ref.orderBy ('dataChamado', 'desc')).get()
     }
-   
-    salvarChamado(chamado : Chamado): Promise<DocumentReference>{
-      alert("Testes");
-      return this.db.collection(this.chamadoColection).add(chamado)
+
+    salvarChamado(chamado: Chamado): Promise<DocumentReference>{
+      //alert("Testes");
+      return this.db.collection(this.chamadoColection).add(chamado);
     }
 
-  //Metodo para editar o chamado 
+  //Metodo para editar o chamado
   editadarChamado(chamado : ChamadoViewModel): Promise<void>{
     return this.db.collection(this.chamadoColection).doc(chamado.id).update(chamado);
   }
 
-  //metodo para editar apenas o campo especifico 
+  //metodo para editar apenas o campo especifico
   editarChamadoParcial(id: string, obj : Object): Promise<void>{
     return this.db.collection(this.chamadoColection).doc(id).update(obj);
   }

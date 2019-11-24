@@ -66,19 +66,19 @@ export class ClienteFormComponent implements OnInit {
         cliente.dataMod = new Date();
 
         this.clienteService.salvaCliente(cliente)
-        .then(response=> this.handleSuccessSave(response,cliente))
-        .catch(err => console.error(err))
-      }else{
+        .then(response => this.handleSuccessSave(response,cliente))
+        .catch(err => console.error(err));
+      } else {
         let cliente: ClienteViewModel = this.clienteForm.value;
         cliente.id = this.cliente.id;
         cliente.dataMod = new Date();
         this.clienteService.editadarCliente(cliente)
-        .then(()=> this.handleSuccessEdit(cliente))
-        .catch(err => console.error(err))
+        .then(() => this.handleSuccessEdit(cliente))
+        .catch(err => console.error(err));
       }
     }
-handleSuccessSave(response:DocumentReference, cliente: Cliente){
-      this.activeModal.dismiss({cliente :cliente, id: response.id, modoInsercao:true });
+handleSuccessSave(response: DocumentReference, cliente: Cliente){
+      this.activeModal.dismiss({cliente: cliente, id: response.id, modoInsercao:true });
   }
 
   handleSuccessEdit(cliente : ClienteViewModel){

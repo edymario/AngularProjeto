@@ -2,6 +2,7 @@
 
 html {
     background-color: #56baed;
+    margin: 100px, 8px,10px,8px;
   }
 
   body {
@@ -16,14 +17,15 @@ html {
     font-weight: 400;
   }
 
-  h2 {
+  h1 {
     text-align: center;
-    font-size: 16px;
+    font-size: 30px;
     font-weight: 600;
     text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display:inline-block;
-    margin: 40px 8px 10px 8px;
-    color: #cccccc;
+    margin: 20px 8px 20px 8px;
+    color: #000000;
   }
 
 
@@ -37,7 +39,7 @@ html {
     justify-content: center;
     width: 100%;
     min-height: 100%;
-    padding: 20px;
+    padding: 100px;
   }
 
   #Content {
@@ -49,8 +51,8 @@ html {
     max-width: 450px;
     position: relative;
     padding: 0px;
-    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
-    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    -webkit-box-shadow: 30px 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 30px 30px 60px 0 rgba(0,0,0,0.3);
     text-align: center;
   }
 

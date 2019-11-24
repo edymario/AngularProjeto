@@ -31,28 +31,55 @@ export class ChamadoModalComponent implements OnInit {
         concluido: false
       });
   }
-  
-  
+
+
   modoInsercao : boolean = true;
   chamado: ChamadoViewModel;
   indexCli: string;
   clienteId:number;
-  
-  
+
 
   salvarChamado(){
+    if(this.chamadoForm.invalid){
+      return;
+    }
+
+    if(this.modoInsercao){
+      let chamado: Chamado = this.chamadoForm.value;
+      //chamado.dataCad = new Date();
+      chamado.dataChamado = new Date();
+      chamado.id_cliente = this.clienteId;
+      chamado.cliente = this.indexCli;
+
+      this.chamadoService.salvarChamado(chamado)
+      .then(response => this.handleSuccessSave(response, chamado))
+      .catch(err => console.error(err));
+    }else{
+
+      let chamado: ChamadoViewModel = this.chamadoForm.value;
+      chamado.id = this.chamado.id;
+      this.chamadoService.editadarChamado(chamado)
+      .then(()=> this.handleSuccessEdit(chamado))
+      .catch(err => console.error(err))
+    }
+  }
+ /* salvarChamado(){
     console.log("teste de chamada = " + this.indexCli);
     if(this.chamadoForm.invalid){
       return;
     }else{
       let chamado: Chamado = this.chamadoForm.value;
-      chamado.dataChamado = new Date(); 
+      chamado.dataChamado = new Date();
       chamado.id_cliente = this.clienteId;
       chamado.cliente = this.indexCli;
       this.chamadoService.salvarChamado(chamado).then(response=> this.handleSuccessSave(response,chamado))
       .catch(err => console.error(err))
     }
-  }
+  }*/
+
+  carregarTudo(chamado){
+    this.chamadoForm.patchValue(chamado);
+}
   /*salvarChamado(clienteId : string, index: number{
     alert("Chamada de metodo")
 
@@ -65,8 +92,8 @@ export class ChamadoModalComponent implements OnInit {
     if(this.modoInsercao){
       alert("estou aqui")
       let chamado: Chamado = this.chamadoForm.value;
-      chamado.dataChamado = new Date(); 
-    
+      chamado.dataChamado = new Date();
+
       this.chamadoService.salvaChamado(chamado)
       .then(response=> this.handleSuccessSave(response,chamado))
       .catch(err => console.error(err))
@@ -80,7 +107,7 @@ export class ChamadoModalComponent implements OnInit {
     }
   }*/
   handleSuccessSave(response:DocumentReference, chamado: Chamado){
-    //, modoInsercao:true 
+    //, modoInsercao:true
     this.activeModal.dismiss({chamado :chamado, id: response.id, CreateModel:true});
 }
 

@@ -62,7 +62,7 @@ export class ClienteComponent implements OnInit {
       });
   }
 
-  deletarClick(clienteId : string, index: number){
+  deletarClick(clienteId: string, index: number){
     this.serviceCliente.deletarCliente(clienteId)
     .then(() => {this.clientes.splice(index, 1);})
     .catch(erro => console.error(erro));
